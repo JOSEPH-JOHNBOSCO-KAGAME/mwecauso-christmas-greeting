@@ -6,33 +6,48 @@
 <title>MWECAUSO Christmas Greeting</title>
 
 <style>
+/* ===== GLOBAL ===== */
 body {
     margin: 0;
+    min-height: 100vh;
     font-family: Arial, sans-serif;
-    background: white;
-    color: white;
     text-align: center;
+    color: white;
+    background: url("xmas4.jpg") center/cover no-repeat fixed;
+    overflow-x: hidden;
 }
 
+/* DARK OVERLAY */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 0;
+}
+
+/* PAGE LAYOUT */
 .page {
+    position: relative;
+    z-index: 2;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background: white;
 }
 
 .hidden {
     display: none;
 }
 
+/* LOGO */
 .logo {
     width: 120px;
     margin-bottom: 10px;
 }
 
+/* SANTA IMAGES */
 .santa img {
     width: 130px;
     margin: 10px;
@@ -45,6 +60,7 @@ body {
     100% { transform: translateY(0); }
 }
 
+/* INPUT & BUTTON */
 input {
     padding: 12px;
     width: 80%;
@@ -65,46 +81,22 @@ button {
     cursor: pointer;
 }
 
+/* GREETING CARD */
 .card {
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.65);
     padding: 25px;
     border-radius: 15px;
     max-width: 400px;
 }
 
-/* FULL BACKGROUND IMAGE */
-body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    background: url("xmas 4.jpg") no-repeat center center fixed;
-    background-size: cover;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
-}
-
-/* DARK OVERLAY FOR READABILITY */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.4);
-    z-index: -1;
-}
-
-/* SNOW CONTAINER */
+/* ===== SNOW ===== */
 .snow {
     position: fixed;
-    top: -10px;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 1;
 }
 
-/* SNOW FLAKES */
 .snow span {
     position: absolute;
     top: -10px;
@@ -116,104 +108,87 @@ body {
     animation: fall linear infinite;
 }
 
-/* SNOW ANIMATION */
 @keyframes fall {
-    0% {
-        transform: translateY(-10px);
-    }
-    100% {
-        transform: translateY(110vh);
-    }
+    to { transform: translateY(110vh); }
 }
-
 </style>
 </head>
 
 <body>
+
 <div class="overlay"></div>
 
 <div class="snow">
-    <span style="left:5%; animation-duration:10s;"></span>
-    <span style="left:15%; animation-duration:12s;"></span>
-    <span style="left:25%; animation-duration:9s;"></span>
-    <span style="left:35%; animation-duration:11s;"></span>
-    <span style="left:45%; animation-duration:8s;"></span>
-    <span style="left:55%; animation-duration:13s;"></span>
-    <span style="left:65%; animation-duration:10s;"></span>
-    <span style="left:75%; animation-duration:12s;"></span>
-    <span style="left:85%; animation-duration:9s;"></span>
-    <span style="left:95%; animation-duration:11s;"></span>
+    <span style="left:5%;animation-duration:10s;"></span>
+    <span style="left:15%;animation-duration:12s;"></span>
+    <span style="left:25%;animation-duration:9s;"></span>
+    <span style="left:35%;animation-duration:11s;"></span>
+    <span style="left:45%;animation-duration:8s;"></span>
+    <span style="left:55%;animation-duration:13s;"></span>
+    <span style="left:65%;animation-duration:10s;"></span>
+    <span style="left:75%;animation-duration:12s;"></span>
+    <span style="left:85%;animation-duration:9s;"></span>
+    <span style="left:95%;animation-duration:11s;"></span>
 </div>
 
-<!-- AUDIO (plays only after user click) -->
-<audio id="bgMusic" preload="auto" loop>
+<!-- AUDIO -->
+<audio id="bgMusic" loop>
     <source src="joy.mp3" type="audio/mpeg">
 </audio>
 
-<!-- PAGE 1: NAME FORM -->
+<!-- PAGE 1 -->
 <div class="page" id="formPage">
     <img src="mwecauso.png" class="logo" alt="MWECAUSO Logo">
 
     <h2>🎄 Christmas Greetings 🎄</h2>
 
     <div class="santa">
-        <img src="xmas2.jpg" alt="Santa">
-        <img src="xmas3.jpg" alt="Santa">
+        <img src="xmas2.jpg">
+        <img src="xmas3.jpg">
     </div>
 
     <input type="text" id="nameInput" placeholder="Enter your name">
-
     <button onclick="showGreeting()">Done</button>
 </div>
 
-<!-- PAGE 2: GREETING -->
+<!-- PAGE 2 -->
 <div class="page hidden" id="greetingPage">
     <div class="card">
         <h2 id="greetingText"></h2>
-
         <p>
             Ministry of Social Welfare – MWECAUSO<br>
             wishes you a Merry Christmas 🎄<br>
             and a Happy New Year 🎆
         </p>
-
         <button onclick="shareWhatsApp()">📱 Share on WhatsApp</button>
     </div>
 </div>
 
 <script>
 function showGreeting() {
-    const name = document.getElementById("nameInput").value.trim();
+    const name = nameInput.value.trim();
+    if (!name) return alert("Please enter your name");
 
-    if (name === "") {
-        alert("Please enter your name");
-        return;
-    }
+    formPage.classList.add("hidden");
+    greetingPage.classList.remove("hidden");
 
-    document.getElementById("formPage").classList.add("hidden");
-    document.getElementById("greetingPage").classList.remove("hidden");
+    greetingText.innerHTML = `🎅 Merry Christmas,<br><strong>${name}</strong>! 🎄`;
 
-    document.getElementById("greetingText").innerHTML =
-        "🎅 Merry Christmas, <br><strong>" + name + "</strong>! 🎄";
-
-    // Play music ONLY after button click (mobile-safe)
-    const audio = document.getElementById("bgMusic");
-    audio.volume = 1;
-    audio.play().catch(() => {});
+    bgMusic.play().catch(()=>{});
 }
 
 function shareWhatsApp() {
-    const name = document.getElementById("nameInput").value.trim();
+    const name = nameInput.value.trim();
+    const msg =
+`🎄 Merry Christmas ${name}! 🎅
 
-    const message =
-        "🎄 Merry Christmas " + name + "! 🎅\n\n" +
-        "Ministry of Social Welfare – MWECAUSO wishes you a Merry Christmas and a Happy New Year 🎆\n\n" +
-        "Visit:\nhttps://joseph-johnbosco-kagame.github.io/mwecauso-christmas-greeting/";
+Ministry of Social Welfare – MWECAUSO
+wishes you a Merry Christmas and a Happy New Year 🎆
 
-    const url = "https://wa.me/?text=" + encodeURIComponent(message);
+Visit:
+https://joseph-johnbosco-kagame.github.io/mwecauso-christmas-greeting/`;
 
-    // OPEN WHATSAPP ONLY WHEN BUTTON IS CLICKED
-    window.open(url, "_blank");
+    window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
 }
 </script>
 
