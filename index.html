@@ -1,161 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>MWECAUSO Christmas Greetings</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>MWECAUSO Christmas Greetings</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background: url('https://images.unsplash.com/photo-1543589077-47d81606c1bf') no-repeat center center/cover;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', Arial, sans-serif;
+        background: url('https://images.unsplash.com/photo-1512389142860-9c449e58a543') center/cover no-repeat;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-        .overlay {
-            background: rgba(0, 0, 0, 0.55);
-            width: 100%;
-            height: 100%;
-            position: absolute;
-        }
+    body::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.6);
+        z-index: 0;
+    }
 
-        .card {
-            position: relative;
-            background: #ffffff;
-            width: 90%;
-            max-width: 420px;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            text-align: center;
-            z-index: 1;
-        }
+    /* Snow */
+    .snow {
+        position: absolute;
+        inset: 0;
+        background-image:
+            radial-gradient(white 1px, transparent 1px),
+            radial-gradient(white 1px, transparent 1px);
+        background-size: 50px 50px, 80px 80px;
+        animation: snow 10s linear infinite;
+        z-index: 1;
+    }
 
-        .logo img {
-            width: 80px;
-            margin-bottom: 10px;
-        }
+    @keyframes snow {
+        to { background-position: 0 100vh, 0 200vh; }
+    }
 
-        h3 {
-            color: #0b2c5d;
-            margin-bottom: 5px;
-        }
+    /* MAIN CARD */
+    .card {
+        position: relative;
+        z-index: 2;
+        background: white;
+        width: 90%;
+        max-width: 420px;
+        padding: 25px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        animation: slideIn 1s ease;
+    }
 
-        p.subtitle {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 20px;
-        }
+    @keyframes slideIn {
+        from { transform: translateY(40px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
 
-        input {
-            width: 90%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
+    .logo img {
+        width: 80px;
+    }
 
-        button {
-            width: 95%;
-            background: #f4b400;
-            border: none;
-            padding: 12px;
-            font-size: 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-bottom: 10px;
-        }
+    .santa {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+    }
 
-        button:hover {
-            background: #d9a200;
-        }
+    .santa img {
+        width: 70px;
+        animation: bounce 2s infinite;
+    }
 
-        .message {
-            margin-top: 15px;
-            font-size: 16px;
-            color: #0b2c5d;
-            display: none;
-        }
+    @keyframes bounce {
+        0%,100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
 
-        .whatsapp {
-            background: #25D366;
-            color: white;
-        }
+    h3 { color: #0b2c5d; }
 
-        .footer {
-            margin-top: 15px;
-            font-size: 12px;
-            color: #777;
-        }
-    </style>
+    input {
+        width: 90%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin: 15px 0;
+    }
+
+    button {
+        width: 95%;
+        padding: 12px;
+        background: #c62828;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    button:hover { background: #a81f1f; }
+
+    /* SUB FORM (MODAL) */
+    .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.7);
+        z-index: 10;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 420px;
+        text-align: center;
+        animation: zoom 0.6s ease;
+    }
+
+    @keyframes zoom {
+        from { transform: scale(0.7); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    .message {
+        font-size: 16px;
+        color: #ca0f28;
+        margin: 15px 0;
+    }
+
+    .whatsapp {
+        background: #25D366;
+    }
+
+    .close {
+        margin-top: 10px;
+        background: #555;
+    }
+</style>
 </head>
+
 <body>
 
-<div class="overlay"></div>
+<div class="snow"></div>
 
+<!-- FORM 1 -->
 <div class="card">
     <div class="logo">
-        <!-- MWECAU LOGO (replace link if you have official one) -->
-        <img src="C:\Users\USER\Desktop\mwecauso.png" alt="MWECAU Logo">
+        <img src="C:\Users\USER\Documents\xmas\mwecauso.png" alt="MWECAU Logo">
+    </div>
+
+    <div class="santa">
+        <img src="C:\Users\USER\Documents\xmas\xmas 2.jpg">
+        <img src="C:\Users\USER\Documents\xmas\xmas 3.jpg">
     </div>
 
     <h3>Ministry of Social Welfare</h3>
-    <p class="subtitle">MWECAUSO – Mwenge Catholic University</p>
+    <p>MWECAUSO – Mwenge Catholic University</p>
 
     <input type="text" id="name" placeholder="Enter your name">
 
-    <button onclick="showMessage()">View Greeting</button>
+    <button onclick="openGreeting()">DONE</button>
+</div>
 
-    <div class="message" id="msg"></div>
+<!-- FORM 2 (SUB FORM) -->
+<div class="modal" id="greetingModal">
+    <div class="modal-content">
+        <h3>🎄 Season’s Greetings 🎄</h3>
 
-    <button class="whatsapp" onclick="shareWhatsApp()">Share on WhatsApp</button>
+        <div class="message" id="greetingText"></div>
 
-    <div class="footer">
-        © MWECAUSO | Merry Christmas & Happy New Year
+        <button class="whatsapp" onclick="share()">📱 Share on WhatsApp</button>
+        <button class="close" onclick="closeModal()">Close</button>
     </div>
 </div>
 
-<!-- 🎵 BACKGROUND MUSIC -->
-<audio id="bgMusic" loop>
-    <source src="https://cdn.pixabay.com/audio/2022/11/14/audio_8a88e46f63.mp3" type="audio/mpeg">
+<!-- MUSIC -->
+<audio id="music" loop>
+    <source src="C:\Users\USER\Documents\xmas\joy.mp3">
 </audio>
 
 <script>
-    const params = new URLSearchParams(window.location.search);
-    const urlName = params.get("name");
+    const music = document.getElementById("music");
 
-    if (urlName) {
-        document.getElementById("name").value = urlName;
-        showMessage();
-    }
-
-    function showMessage() {
-        let name = document.getElementById("name").value.trim();
-        if (name === "") {
+    function openGreeting() {
+        const name = document.getElementById("name").value.trim();
+        if (!name) {
             alert("Please enter your name");
             return;
         }
 
-        document.getElementById("msg").style.display = "block";
-        document.getElementById("msg").innerHTML =
-            "🎄 <b>The Ministry of Social Welfare – MWECAUSO</b><br><br>" +
-            "wishes <b>" + name + "</b> a Merry Christmas 🎁<br>" +
+        document.getElementById("greetingText").innerHTML =
+            "🎁 <b>The Ministry of Social Welfare – MWECAUSO</b><br><br>" +
+            "wishes <b>" + name + "</b> a Merry Christmas 🎄<br>" +
             "and a Happy New Year 🎉";
 
-        document.getElementById("bgMusic").play();
+        document.getElementById("greetingModal").style.display = "flex";
+        music.play().catch(() => {});
     }
 
-    function shareWhatsApp() {
-        let name = document.getElementById("name").value || "You";
-        let link = window.location.origin + window.location.pathname + "?name=" + encodeURIComponent(name);
+    function closeModal() {
+        document.getElementById("greetingModal").style.display = "none";
+        music.pause();
+    }
 
-        let text = "🎄 The Ministry of Social Welfare – MWECAUSO wishes " +
-                   name + " a Merry Christmas and a Happy New Year 🎉\n\n" +
-                   link;
+    function share() {
+        const name = document.getElementById("name").value;
+        const link = location.origin + location.pathname + "?name=" + encodeURIComponent(name);
+        const text = "🎄 MWECAUSO wishes " + name +
+                     " a Merry Christmas and a Happy New Year 🎉\n\n" + link;
 
         window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank");
     }
@@ -163,3 +222,4 @@
 
 </body>
 </html>
+
