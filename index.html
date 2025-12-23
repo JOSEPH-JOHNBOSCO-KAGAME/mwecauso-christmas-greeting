@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MWECAUSO Christmas Greetings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: url('https://images.unsplash.com/photo-1543589077-47d81606c1bf') no-repeat center center/cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.55);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        .card {
+            position: relative;
+            background: #ffffff;
+            width: 90%;
+            max-width: 420px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 1;
+        }
+
+        .logo img {
+            width: 80px;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            color: #0b2c5d;
+            margin-bottom: 5px;
+        }
+
+        p.subtitle {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 95%;
+            background: #f4b400;
+            border: none;
+            padding: 12px;
+            font-size: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background: #d9a200;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #0b2c5d;
+            display: none;
+        }
+
+        .whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .footer {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<div class="overlay"></div>
+
+<div class="card">
+    <div class="logo">
+        <!-- MWECAU LOGO (replace link if you have official one) -->
+        <img src="C:\Users\USER\Desktop\mwecauso.png" alt="MWECAU Logo">
+    </div>
+
+    <h3>Ministry of Social Welfare</h3>
+    <p class="subtitle">MWECAUSO – Mwenge Catholic University</p>
+
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <button onclick="showMessage()">View Greeting</button>
+
+    <div class="message" id="msg"></div>
+
+    <button class="whatsapp" onclick="shareWhatsApp()">Share on WhatsApp</button>
+
+    <div class="footer">
+        © MWECAUSO | Merry Christmas & Happy New Year
+    </div>
+</div>
+
+<!-- 🎵 BACKGROUND MUSIC -->
+<audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/11/14/audio_8a88e46f63.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const urlName = params.get("name");
+
+    if (urlName) {
+        document.getElementById("name").value = urlName;
+        showMessage();
+    }
+
+    function showMessage() {
+        let name = document.getElementById("name").value.trim();
+        if (name === "") {
+            alert("Please enter your name");
+            return;
+        }
+
+        document.getElementById("msg").style.display = "block";
+        document.getElementById("msg").innerHTML =
+            "🎄 <b>The Ministry of Social Welfare – MWECAUSO</b><br><br>" +
+            "wishes <b>" + name + "</b> a Merry Christmas 🎁<br>" +
+            "and a Happy New Year 🎉";
+
+        document.getElementById("bgMusic").play();
+    }
+
+    function shareWhatsApp() {
+        let name = document.getElementById("name").value || "You";
+        let link = window.location.origin + window.location.pathname + "?name=" + encodeURIComponent(name);
+
+        let text = "🎄 The Ministry of Social Welfare – MWECAUSO wishes " +
+                   name + " a Merry Christmas and a Happy New Year 🎉\n\n" +
+                   link;
+
+        window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank");
+    }
+</script>
+
+</body>
+</html>
