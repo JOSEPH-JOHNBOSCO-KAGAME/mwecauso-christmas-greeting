@@ -1,11 +1,151 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>TEST</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MWECAUSO Christmas Greeting</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#b30000, #ff4d4d);
+    color: white;
+    text-align: center;
+}
+
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.logo {
+    width: 120px;
+    margin-bottom: 10px;
+}
+
+.santa img {
+    width: 130px;
+    margin: 10px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+input {
+    padding: 12px;
+    width: 80%;
+    max-width: 300px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 12px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    background: gold;
+    color: #8b0000;
+    cursor: pointer;
+}
+
+.card {
+    background: rgba(0,0,0,0.6);
+    padding: 25px;
+    border-radius: 15px;
+    max-width: 400px;
+}
+</style>
 </head>
+
 <body>
-  <h1>🎄 SITE LOADED SUCCESSFULLY</h1>
-  <p>If you see this, no redirect exists.</p>
+
+<!-- AUDIO (plays only after user click) -->
+<audio id="bgMusic" preload="auto" loop>
+    <source src="joy.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1: NAME FORM -->
+<div class="page" id="formPage">
+    <img src="mwecauso.png" class="logo" alt="MWECAUSO Logo">
+
+    <h2>🎄 Christmas Greetings 🎄</h2>
+
+    <div class="santa">
+        <img src="xmas2.jpg" alt="Santa">
+        <img src="xmas3.jpg" alt="Santa">
+    </div>
+
+    <input type="text" id="nameInput" placeholder="Enter your name">
+
+    <button onclick="showGreeting()">Done</button>
+</div>
+
+<!-- PAGE 2: GREETING -->
+<div class="page hidden" id="greetingPage">
+    <div class="card">
+        <h2 id="greetingText"></h2>
+
+        <p>
+            Ministry of Social Welfare – MWECAUSO<br>
+            wishes you a Merry Christmas 🎄<br>
+            and a Happy New Year 🎆
+        </p>
+
+        <button onclick="shareWhatsApp()">📱 Share on WhatsApp</button>
+    </div>
+</div>
+
+<script>
+function showGreeting() {
+    const name = document.getElementById("nameInput").value.trim();
+
+    if (name === "") {
+        alert("Please enter your name");
+        return;
+    }
+
+    document.getElementById("formPage").classList.add("hidden");
+    document.getElementById("greetingPage").classList.remove("hidden");
+
+    document.getElementById("greetingText").innerHTML =
+        "🎅 Merry Christmas, <br><strong>" + name + "</strong>! 🎄";
+
+    // Play music ONLY after button click (mobile-safe)
+    const audio = document.getElementById("bgMusic");
+    audio.volume = 1;
+    audio.play().catch(() => {});
+}
+
+function shareWhatsApp() {
+    const name = document.getElementById("nameInput").value.trim();
+
+    const message =
+        "🎄 Merry Christmas " + name + "! 🎅\n\n" +
+        "Ministry of Social Welfare – MWECAUSO wishes you a Merry Christmas and a Happy New Year 🎆\n\n" +
+        "Visit:\nhttps://joseph-johnbosco-kagame.github.io/mwecauso-christmas-greeting/";
+
+    const url = "https://wa.me/?text=" + encodeURIComponent(message);
+
+    // OPEN WHATSAPP ONLY WHEN BUTTON IS CLICKED
+    window.open(url, "_blank");
+}
+</script>
+
 </body>
 </html>
-
