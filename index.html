@@ -9,11 +9,41 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: white;
     color: white;
-    text-align: center;
+    overflow-x: hidden;
 }
 
+/* Background image */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("bg.jpg") center/cover no-repeat;
+    z-index: -2;
+}
+
+/* Snow layer */
+.snow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image: url("https://i.imgur.com/5bY0z9Z.png");
+    animation: snow 10s linear infinite;
+    z-index: -1;
+}
+
+@keyframes snow {
+    from { background-position: 0 0; }
+    to { background-position: 0 1000px; }
+}
+
+/* Page layout */
 .page {
     min-height: 100vh;
     display: flex;
@@ -21,7 +51,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background: white;
+    text-align: center;
 }
 
 .hidden {
@@ -76,12 +106,14 @@ button {
 
 <body>
 
-<!-- AUDIO (plays only after user click) -->
+<div class="snow"></div>
+
+<!-- AUDIO -->
 <audio id="bgMusic" preload="auto" loop>
     <source src="joy.mp3" type="audio/mpeg">
 </audio>
 
-<!-- PAGE 1: NAME FORM -->
+<!-- FORM PAGE -->
 <div class="page" id="formPage">
     <img src="mwecauso.png" class="logo" alt="MWECAUSO Logo">
 
@@ -97,7 +129,7 @@ button {
     <button onclick="showGreeting()">Done</button>
 </div>
 
-<!-- PAGE 2: GREETING -->
+<!-- GREETING PAGE -->
 <div class="page hidden" id="greetingPage">
     <div class="card">
         <h2 id="greetingText"></h2>
@@ -115,7 +147,6 @@ button {
 <script>
 function showGreeting() {
     const name = document.getElementById("nameInput").value.trim();
-
     if (name === "") {
         alert("Please enter your name");
         return;
@@ -127,7 +158,6 @@ function showGreeting() {
     document.getElementById("greetingText").innerHTML =
         "🎅 Merry Christmas, <br><strong>" + name + "</strong>! 🎄";
 
-    // Play music ONLY after button click (mobile-safe)
     const audio = document.getElementById("bgMusic");
     audio.volume = 1;
     audio.play().catch(() => {});
@@ -142,8 +172,6 @@ function shareWhatsApp() {
         "Visit:\nhttps://joseph-johnbosco-kagame.github.io/mwecauso-christmas-greeting/";
 
     const url = "https://wa.me/?text=" + encodeURIComponent(message);
-
-    // OPEN WHATSAPP ONLY WHEN BUTTON IS CLICKED
     window.open(url, "_blank");
 }
 </script>
