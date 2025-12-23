@@ -79,6 +79,19 @@ button {
     background: gold;
     color: #8b0000;
     cursor: pointer;
+    
+    .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.close-btn {
+    background: #eee;
+    color: #333;
+}
+
 }
 
 /* GREETING CARD */
@@ -94,7 +107,7 @@ button {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 1;
+    z-index: 0;
 }
 
 .snow span {
@@ -192,12 +205,9 @@ button {
             wishes you a Merry Christmas 🎄<br>
             and a Happy New Year 🎆
         </p>
-       <button onclick="shareWhatsApp()">📱 Share on WhatsApp</button>
-
-<button onclick="closeGreeting()" style="background:#ddd;color:#333;">
-❌ Close
-</button>
-    </div>
+ <div class="button-group">
+    <button onclick="shareWhatsApp()">📱 Share on WhatsApp</button>
+    <button class="close-btn" onclick="closeGreeting()">❌ Close</button>
 </div>
 
 <script>
@@ -211,6 +221,17 @@ function showGreeting() {
     greetingText.innerHTML = `🎅 Merry Christmas,<br><strong>${name}</strong>! 🎄`;
 
     bgMusic.play().catch(()=>{});
+    <script>
+function closeGreeting() {
+    const audio = document.getElementById("bgMusic");
+    audio.pause();
+    audio.currentTime = 0;
+
+    document.getElementById("greetingPage").classList.add("hidden");
+    document.getElementById("formPage").classList.remove("hidden");
+}
+</script>
+
 }
 
 function shareWhatsApp() {
