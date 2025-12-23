@@ -192,7 +192,11 @@ button {
             wishes you a Merry Christmas 🎄<br>
             and a Happy New Year 🎆
         </p>
-        <button onclick="shareWhatsApp()">📱 Share on WhatsApp</button>
+       <button onclick="shareWhatsApp()">📱 Share on WhatsApp</button>
+
+<button onclick="closeGreeting()" style="background:#ddd;color:#333;">
+❌ Close
+</button>
     </div>
 </div>
 
@@ -222,6 +226,17 @@ https://joseph-johnbosco-kagame.github.io/mwecauso-christmas-greeting/`;
 
     window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
 }
+function closeGreeting() {
+    // Stop music
+    const audio = document.getElementById("bgMusic");
+    audio.pause();
+    audio.currentTime = 0;
+
+    // Go back to form
+    document.getElementById("greetingPage").classList.add("hidden");
+    document.getElementById("formPage").classList.remove("hidden");
+}
+
 </script>
 
 </body>
