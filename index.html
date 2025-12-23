@@ -2,146 +2,98 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>MWECAUSO Christmas Greetings</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MWECAUSO Christmas Greeting</title>
 
 <style>
     body {
         margin: 0;
-        font-family: 'Poppins', Arial, sans-serif;
-        background: url('https://images.unsplash.com/photo-1512389142860-9c449e58a543') center/cover no-repeat;
-        height: 100vh;
-        overflow: hidden;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(#b30000, #ff3333);
+        color: white;
+        overflow-x: hidden;
+    }
+
+    .container {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .logo {
+        width: 120px;
+        margin-bottom: 10px;
+    }
+
+    .form-page, .greeting-page {
+        min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
     }
-
-    body::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(0,0,0,0.6);
-        z-index: 0;
-    }
-
-    /* Snow */
-    .snow {
-        position: absolute;
-        inset: 0;
-        background-image:
-            radial-gradient(white 1px, transparent 1px),
-            radial-gradient(white 1px, transparent 1px);
-        background-size: 50px 50px, 80px 80px;
-        animation: snow 10s linear infinite;
-        z-index: 1;
-    }
-
-    @keyframes snow {
-        to { background-position: 0 100vh, 0 200vh; }
-    }
-
-    /* MAIN CARD */
-    .card {
-        position: relative;
-        z-index: 2;
-        background: white;
-        width: 90%;
-        max-width: 420px;
-        padding: 25px;
-        border-radius: 15px;
-        text-align: center;
-        box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-        animation: slideIn 1s ease;
-    }
-
-    @keyframes slideIn {
-        from { transform: translateY(40px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-    }
-
-    .logo img {
-        width: 80px;
-    }
-
-    .santa {
-        display: flex;
-        justify-content: space-between;
-        margin: 10px 0;
-    }
-
-    .santa img {
-        width: 70px;
-        animation: bounce 2s infinite;
-    }
-
-    @keyframes bounce {
-        0%,100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-    }
-
-    h3 { color: #0b2c5d; }
 
     input {
-        width: 90%;
-        padding: 10px;
+        padding: 12px;
+        width: 80%;
+        max-width: 300px;
         border-radius: 8px;
-        border: 1px solid #ccc;
-        margin: 15px 0;
+        border: none;
+        margin: 10px 0;
+        font-size: 16px;
     }
 
     button {
-        width: 95%;
-        padding: 12px;
-        background: #c62828;
-        color: white;
+        padding: 12px 30px;
+        font-size: 18px;
+        border-radius: 25px;
         border: none;
-        border-radius: 8px;
-        font-size: 15px;
+        background: gold;
+        color: #8b0000;
         cursor: pointer;
+        margin-top: 15px;
     }
 
-    button:hover { background: #a81f1f; }
+    button:hover {
+        background: #ffeb3b;
+    }
 
-    /* SUB FORM (MODAL) */
-    .modal {
+    .santa img {
+        width: 140px;
+        margin: 10px;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
+    }
+
+    .greeting-page {
         display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.7);
-        z-index: 10;
-        justify-content: center;
-        align-items: center;
+        background: url("xmas2.jpg") center/cover no-repeat;
     }
 
-    .modal-content {
-        background: white;
+    .card {
+        background: rgba(0,0,0,0.6);
         padding: 25px;
         border-radius: 15px;
-        width: 90%;
-        max-width: 420px;
-        text-align: center;
-        animation: zoom 0.6s ease;
+        max-width: 90%;
     }
 
-    @keyframes zoom {
-        from { transform: scale(0.7); opacity: 0; }
-        to { transform: scale(1); opacity: 1; }
+    .snow {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background-image: url("https://i.imgur.com/5bY0z9Z.png");
+        animation: snow 10s linear infinite;
     }
 
-    .message {
-        font-size: 16px;
-        color: #ca0f28;
-        margin: 15px 0;
-    }
-
-    .whatsapp {
-        background: #25D366;
-    }
-
-    .close {
-        margin-top: 10px;
-        background: #555;
+    @keyframes snow {
+        from { background-position: 0 0; }
+        to { background-position: 0 1000px; }
     }
 </style>
 </head>
@@ -150,76 +102,89 @@
 
 <div class="snow"></div>
 
-<!-- FORM 1 -->
-<div class="card">
-    <div class="logo">
-        <img src="mwecauso.png" alt="MWECAUSO Logo">
-    </div>
-
-    <div class="santa">
-        <img src="xmas2.jpg" alt="father xmas">
-        <img src="xmas3.jpg"alt="santas xmas">
-    </div>
-
-    <h3>Ministry of Social Welfare</h3>
-    <p>MWECAUSO – Mwenge Catholic University</p>
-
-    <input type="text" id="name" placeholder="Enter your name">
-
-    <button onclick="openGreeting()">DONE</button>
-</div>
-
-<!-- FORM 2 (SUB FORM) -->
-<div class="modal" id="greetingModal">
-    <div class="modal-content">
-        <h3>🎄 Season’s Greetings 🎄</h3>
-
-        <div class="message" id="greetingText"></div>
-
-        <button class="whatsapp" onclick="share()">📱 Share on WhatsApp</button>
-        <button class="close" onclick="closeModal()">Close</button>
-    </div>
-</div>
-
-<!-- MUSIC -->
-<audio id="music" loop>
-    <source src="joy.mp3">
+<!-- AUDIO (mobile-safe) -->
+<audio id="bgMusic" preload="auto" loop>
+    <source src="joy.mp3" type="audio/mpeg">
 </audio>
 
+<!-- FORM PAGE -->
+<div class="form-page container" id="formPage">
+    <img src="mwecauso.png" class="logo" alt="MWECAUSO Logo">
+
+    <h2>🎄 Christmas Greetings 🎄</h2>
+
+    <div class="santa">
+        <img src="xmas2.jpg" alt="Santa">
+        <img src="xmas3.jpg" alt="Santa">
+    </div>
+
+    <input type="text" id="nameInput" placeholder="Enter your name" required>
+
+    <button onclick="openGreeting()">Done</button>
+</div>
+
+<!-- GREETING PAGE -->
+<div class="greeting-page container" id="greetingPage">
+    <div class="card">
+        <h2 id="greetingText"></h2>
+
+        <p>
+            Ministry of Social Welfare – MWECAUSO<br>
+            wishes you a Merry Christmas  🎄<br>
+            and a Happy New Year 2026🎆
+        </p>
+
+        <br>
+
+        <a id="whatsappShare" target="_blank">
+            <button>📱 Share on WhatsApp</button>
+        </a>
+    </div>
+</div>
+
 <script>
-    const music = document.getElementById("music");
+function openGreeting() {
+    const name = document.getElementById("nameInput").value.trim();
 
-    function openGreeting() {
-        const name = document.getElementById("name").value.trim();
-        if (!name) {
-            alert("Please enter your name");
-            return;
-        }
-
-        document.getElementById("greetingText").innerHTML =
-            "🎁 <b>The Ministry of Social Welfare – MWECAUSO</b><br><br>" +
-            "wishes <b>" + name + "</b> a Merry Christmas 🎄<br>" +
-            "and a Happy New Year 🎉";
-
-        document.getElementById("greetingModal").style.display = "flex";
-        music.play().catch(() => {});
+    if (name === "") {
+        alert("Please enter your name");
+        return;
     }
 
-    function closeModal() {
-        document.getElementById("greetingModal").style.display = "none";
-        music.pause();
-    }
+    // Show greeting
+    document.getElementById("formPage").style.display = "none";
+    document.getElementById("greetingPage").style.display = "flex";
 
-    function share() {
-        const name = document.getElementById("name").value;
-        const link = location.origin + location.pathname + "?name=" + encodeURIComponent(name);
-        const text = "🎄 MWECAUSO wishes " + name +
-                     " a Merry Christmas and a Happy New Year 🎉\n\n" + link;
+    document.getElementById("greetingText").innerHTML =
+        "🎄 Merry Christmas, <br><strong>" + name + "</strong>! 🎅";
 
-        window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank");
+    // WhatsApp message
+    const message =
+        "🎄 Merry Christmas " + name +
+        "! 🎅%0A%0AMinistry of Social Welfare – MWECAUSO wishes you a Merry Christmas and a Happy New Year 🎆%0A%0A" +
+        "👇 View greeting:%0A" + window.location.href;
+
+    document.getElementById("whatsappShare").href =
+        "https://wa.me/?text=" + message;
+
+    // ✅ MOBILE-SAFE AUDIO PLAY (user interaction)
+    const audio = document.getElementById("bgMusic");
+    audio.muted = false;
+    audio.volume = 1.0;
+
+    audio.play().catch(() => {
+        console.log("Audio blocked until user taps screen");
+    });
+}
+
+// EXTRA SAFETY: allow tap anywhere if browser still blocks
+document.addEventListener("click", function () {
+    const audio = document.getElementById("bgMusic");
+    if (audio.paused) {
+        audio.play().catch(() => {});
     }
+}, { once: true });
 </script>
 
 </body>
 </html>
-
