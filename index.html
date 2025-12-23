@@ -111,6 +111,16 @@ button {
 @keyframes fall {
     to { transform: translateY(110vh); }
 }
+    /* WHITE FORM CARD */
+.form-card {
+    background: white;
+    color: #333;
+    padding: 30px 20px;
+    border-radius: 18px;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
 </style>
 </head>
 
@@ -119,16 +129,31 @@ button {
 <div class="overlay"></div>
 
 <div class="snow">
-    <span style="left:5%;animation-duration:10s;"></span>
-    <span style="left:15%;animation-duration:12s;"></span>
-    <span style="left:25%;animation-duration:9s;"></span>
-    <span style="left:35%;animation-duration:11s;"></span>
-    <span style="left:45%;animation-duration:8s;"></span>
-    <span style="left:55%;animation-duration:13s;"></span>
-    <span style="left:65%;animation-duration:10s;"></span>
-    <span style="left:75%;animation-duration:12s;"></span>
-    <span style="left:85%;animation-duration:9s;"></span>
-    <span style="left:95%;animation-duration:11s;"></span>
+    <span style="left:2%;animation-duration:9s;"></span>
+    <span style="left:6%;animation-duration:11s;"></span>
+    <span style="left:10%;animation-duration:8s;"></span>
+    <span style="left:14%;animation-duration:12s;"></span>
+    <span style="left:18%;animation-duration:10s;"></span>
+    <span style="left:22%;animation-duration:9s;"></span>
+    <span style="left:26%;animation-duration:13s;"></span>
+    <span style="left:30%;animation-duration:11s;"></span>
+    <span style="left:34%;animation-duration:8s;"></span>
+    <span style="left:38%;animation-duration:12s;"></span>
+    <span style="left:42%;animation-duration:9s;"></span>
+    <span style="left:46%;animation-duration:10s;"></span>
+    <span style="left:50%;animation-duration:8s;"></span>
+    <span style="left:54%;animation-duration:11s;"></span>
+    <span style="left:58%;animation-duration:13s;"></span>
+    <span style="left:62%;animation-duration:9s;"></span>
+    <span style="left:66%;animation-duration:12s;"></span>
+    <span style="left:70%;animation-duration:10s;"></span>
+    <span style="left:74%;animation-duration:8s;"></span>
+    <span style="left:78%;animation-duration:11s;"></span>
+    <span style="left:82%;animation-duration:9s;"></span>
+    <span style="left:86%;animation-duration:13s;"></span>
+    <span style="left:90%;animation-duration:10s;"></span>
+    <span style="left:94%;animation-duration:8s;"></span>
+    <span style="left:98%;animation-duration:12s;"></span>
 </div>
 
 <!-- AUDIO -->
@@ -137,8 +162,9 @@ button {
 </audio>
 
 <!-- PAGE 1 -->
-<div class="page" id="formPage">
-    <img src="mwecauso.png" class="logo" alt="MWECAUSO Logo">
+<div class="form-card">
+
+    <img src="mwecauso.png" class="logo">
 
     <h2>🎄 Christmas Greetings 🎄</h2>
 
@@ -146,6 +172,12 @@ button {
         <img src="xmas2.jpg">
         <img src="xmas3.jpg">
     </div>
+
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <button onclick="showGreeting()">Done</button>
+
+</div>
+
 
     <input type="text" id="nameInput" placeholder="Enter your name">
     <button onclick="showGreeting()">Done</button>
